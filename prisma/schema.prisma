@@ -11,8 +11,9 @@ generator client {
     provider = "prisma-client-js"
 }
 
-model Example {
+model Recipe {
     id        String   @id @default(cuid())
     createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    name      String   @db.VarChar(255)
+    link      String   @db.VarChar(255)
 }

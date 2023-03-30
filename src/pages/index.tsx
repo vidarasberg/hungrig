@@ -10,7 +10,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 
 const Home: NextPage = () => {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
+  const { data } = api.recipes.getAll.useQuery();
 
   const { user } = useUser();
 
@@ -25,6 +25,11 @@ const Home: NextPage = () => {
         <SignedIn>
           <UserButton />
           {user?.fullName}
+          {data?.map((x) => (
+            <a href={x.link} target="_blank" key={x.id}>
+              {x.name}
+            </a>
+          ))}
         </SignedIn>
         <SignedOut>
           <SignInButton />
