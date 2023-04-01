@@ -11,6 +11,15 @@ export const recipesRouter = createTRPCRouter({
     return recipes;
   }),
 
+  getAllByUserId: publicProcedure
+    .input(z.object({ userId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const recipes = await ctx.prisma.recipe.findMany({
+        where: { authorId: input.userId },
+      });
+      return recipes;
+    }),
+
   create: privateProcedure
     .input(
       z.object({
