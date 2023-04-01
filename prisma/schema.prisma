@@ -13,7 +13,10 @@ generator client {
 
 model Recipe {
     id        String   @id @default(cuid())
+    authorId  String
     createdAt DateTime @default(now())
     name      String   @db.VarChar(255)
     link      String   @db.VarChar(255)
+
+    @@index([authorId])
 }
